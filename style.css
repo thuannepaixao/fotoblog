@@ -1,0 +1,243 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* tornando as fontes com tonalidade mais suave  */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+  /* adicionando unidade de medida rem 10px=1rem 16px=1.6rem  */
+  font-size: 62.5%;
+  /* definindo varáveis de acesso para as cores  */
+  /* --color-base-white: #ffffff;
+  --color-base-gray-100: #f5f5f5;
+  --color-base-gray-300: #8d8d99;
+  --color-base-gray-500: #3D3D3D;
+  --color-base-gray-900: #202024; */
+
+  --hue: 310;
+  --color-base-white: hsl(0, 0%, 100%);
+  --color-base-gray-100: hsl(0, 0%, 96%);
+  --color-base-gray-300: hsl(var(--hue), 60%, 58%);
+  --color-base-gray-500: hsl(0, 0%, 24%);
+  --color-base-gray-900: hsl(var(--hue), 60%, 30%);
+}
+
+html, body, input {
+  font-family: 'Mulish', sans-serif;
+}
+
+body {
+  font-size: 1.6rem;
+  background-color: var(--color-base-white);
+  color: var(--color-base-gray-900);
+}
+
+/* .app > * {
+  border: 2px solid red;
+} */
+
+.app {
+  display: grid;
+  /* divisão do espaçamento entre header main e footer  */
+  grid-template-rows: max-content 1fr max-content;
+  height: 100vh;
+}
+
+.container {
+  padding: 1.6rem 3.2rem;
+  /* largura de no mínimo 1120px  */
+  width: min(112rem, 100%);
+  margin: 0 auto;
+}
+
+main {
+  /* barra de rolagem somente dentro do main  */
+  overflow-y: scroll;
+  background-color: var(--color-base-gray-100);
+}
+
+/* .logo {
+  filter: blur(10px); 
+  filter: saturate(300%) brightness(4) hue-rotate(40deg);
+} */
+
+header, nav, nav ul {
+  display: flex;
+  align-items: center;
+  gap: 7.2rem;
+  font-weight: 700;
+}
+
+header form {
+  /* espaçamento do search  */
+  flex: 1;
+}
+
+nav ul {
+  /* remover os pontos do link  */
+  list-style: none;
+  font-size: 1.8rem;
+  color: var(--color-base-gray-300);
+}
+
+ul li.active {
+  color: var(--color-base-gray-900);
+}
+
+.input-wrapper label {
+  /* escondendo o label de informação  */
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 1.6rem;
+
+  background-color: var(--color-base-gray-100);
+  border: 0;
+  border-radius: .6rem;
+
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.input-wrapper input::placeholder {
+  opacity: 0.56;
+  color: var(--color-base-gray-500);
+}
+
+.avatar {
+  width: 4.2rem;
+  height: 4.2rem;
+  /* cobrir o espaço da imagem  */
+  object-fit: cover;
+  /* arredondando a imagem  */
+  border-radius: 50%;
+}
+
+/* galeria  */
+main h1 {
+  padding-top: 1.6rem;
+  font-size: 2.4rem;
+}
+
+.gallery {
+  margin-top: 3.2rem;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.2rem;
+}
+
+.item {
+  background-color: var(--color-base-white);
+  border-radius: .8rem;
+  /* escondendo o que está transbordando da caixa  */
+  overflow: hidden;
+}
+
+.item img {
+  width: 100%;
+  /* configurando a proporção da largura / altura da imagem  */
+  aspect-ratio: 16/9;
+  /* cobrindo a largura e a altura total  */
+  object-fit: cover;
+
+  /* filter: grayscale(1);  */
+
+  /* transition-property: filter;  */
+  /* transition-property: transform, filter;  */
+  /* transition-property: all;
+  transition-duration: 200ms;
+  transition-delay: 1s;
+  transition-timing-function: ease-out; */
+
+  transition: all 200ms ease-out; 
+  /* transition: filter 200ms ease-out, transform 600ms ease-in; */
+
+  /* removendo espaço na imagem  */
+  display: block;
+}
+
+.item img:hover {
+  /* aplicando filtro na imagem ao passar o mouse  */
+  filter: hue-rotate(7deg) contrast(101%) saturate(200%);
+  /* aumentar a imagem e rotacionar  */
+  transform: scale(2.1) rotate(-2deg);
+}
+
+.details {
+  padding: 2.2rem;
+  background-color: var(--color-base-white);
+  /* adicionando o details por cima da imagem  */
+  z-index: 1;
+  position: relative;
+}
+
+.details h2 {
+  font-size: 1.8rem;
+}
+
+.tags {
+  margin-top: 1.2rem;
+}
+
+.tags span {
+  padding: .6rem;
+  background-color: var(--color-base-gray-100);
+  border-radius: .4rem;
+
+  line-height: 0;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+
+footer p {
+  text-align: center;
+  padding: 1.6rem;
+  font-weight: 600;
+}
+
+header {
+  /* positivo para o negativo do eixo y  */
+  --startY: -100%;
+  animation: move .2s;
+}
+
+footer {
+  /* positivo e continuando positivo para o eixo y  */
+  --startY: 100%;
+  animation: move .2s;
+}
+
+@keyframes move {
+  /* adicionando movimento ao header e ao footer para o eixo y  */
+  from {
+    transform: translateY(var(--startY));
+  }
+}
+
+.item {
+  /* adicionando delay com espaços de tempo  */
+  --delay: .4s;
+  /* apresentação, delay, puxando informações,   */
+  animation: appear .4s var(--delay) backwards;
+}
+
+@keyframes appear {
+  /* adicionando efeitos nas imagens  */
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+}
